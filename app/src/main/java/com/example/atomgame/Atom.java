@@ -11,6 +11,7 @@ public abstract class Atom {
     private final String name;
     private final HashSet<Connection> connections;
     private byte numOfFreeElectrons;
+    public static final byte FREE_ELECTRON_DECREASING_ERROR_CODE = -1;
 
     public Atom(byte valence, byte atomicNumber, @NonNull String name) {
         if (valence > 0) {
@@ -19,7 +20,7 @@ public abstract class Atom {
             throw new IllegalStateException("Valence must be > 0");
         }
         if (atomicNumber > 0) {
-            this.atomicNumber = atomicNumber;;
+            this.atomicNumber = atomicNumber;
         } else {
             throw new IllegalStateException("Atomic number must be > 0");
         }
@@ -56,5 +57,17 @@ public abstract class Atom {
     public boolean removeConnection(Connection connection) {
         numOfFreeElectrons += connection.getType();
         return connections.remove(connection);
+    }
+
+    public byte decreaseNumOfFreeElectrons() {
+        return decreaseNumOfFreeElectrons((byte) 1);
+    }
+
+    public byte decreaseNumOfFreeElectrons(byte decreasingValue) {
+        if ((decreasingValue <= numOfFreeElectrons) && decreasingValue > 0) {
+            return numOfFreeElectrons -= decreasingValue;
+        } else {
+            return FREE_ELECTRON_DECREASING_ERROR_CODE;
+        }
     }
 }
