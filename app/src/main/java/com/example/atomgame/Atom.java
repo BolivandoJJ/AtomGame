@@ -13,8 +13,16 @@ public abstract class Atom {
     private byte numOfFreeElectrons;
 
     public Atom(byte valence, byte atomicNumber, @NonNull String name) {
-        this.valence = valence;
-        this.atomicNumber = atomicNumber;
+        if (valence > 0) {
+            this.valence = valence;
+        } else {
+            throw new IllegalStateException("Valence must be > 0");
+        }
+        if (atomicNumber > 0) {
+            this.atomicNumber = atomicNumber;;
+        } else {
+            throw new IllegalStateException("Atomic number must be > 0");
+        }
         this.name = name;
         numOfFreeElectrons = valence;
         connections = new HashSet<>();
