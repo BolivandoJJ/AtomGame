@@ -29,6 +29,17 @@ public class Connection {
         }
     }
 
+    public void disconnectAtoms() {
+        if (connectedAtoms != null) {
+            for (Atom a : connectedAtoms) {
+                a.removeConnection(this);
+            }
+            connectedAtoms = null;
+        } else {
+            throw new NullPointerException("Connection is no longer active (atoms are disconnected)");
+        }
+    }
+
     private void setType(byte type) {
         if ((type >= MIN_CONNECTION_TYPE_VALUE ) && (type <= MAX_CONNECTION_TYPE_VALUE)) {
             this.type = type;
@@ -39,6 +50,10 @@ public class Connection {
 
     public byte getType() {
         return type;
+    }
+
+    public boolean connectionIsActive() {
+        return connectedAtoms != null;
     }
 
     // method returns type value after incrementing
