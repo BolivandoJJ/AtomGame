@@ -17,12 +17,12 @@ public abstract class Atom {
         if (valence > 0) {
             this.valence = valence;
         } else {
-            throw new IllegalStateException("Valence must be > 0");
+            throw new IllegalArgumentException("Valence must be > 0");
         }
         if (atomicNumber > 0) {
             this.atomicNumber = atomicNumber;
         } else {
-            throw new IllegalStateException("Atomic number must be > 0");
+            throw new IllegalArgumentException("Atomic number must be > 0");
         }
         this.name = name;
         numOfFreeElectrons = valence;

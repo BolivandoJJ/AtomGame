@@ -22,7 +22,7 @@ public class Connection {
         if (atom1 != atom2) {
             connectedAtoms = new Atom[] {atom1, atom2};
         } else {
-            throw new IllegalStateException("Impossible to connect an atom with itself");
+            throw new IllegalArgumentException("Impossible to connect an atom with itself");
         }
         for (Atom a : connectedAtoms) {
             a.addConnection(this);
@@ -44,7 +44,7 @@ public class Connection {
         if ((type >= MIN_CONNECTION_TYPE_VALUE ) && (type <= MAX_CONNECTION_TYPE_VALUE)) {
             this.type = type;
         } else {
-            throw new IllegalStateException("Connection type must be in 1-3 range");
+            throw new IllegalArgumentException("Connection type must be in 1-3 range");
         }
     }
 
