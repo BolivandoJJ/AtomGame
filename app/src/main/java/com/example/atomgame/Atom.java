@@ -1,45 +1,27 @@
 package com.example.atomgame;
 
-import androidx.annotation.NonNull;
-
 import java.util.HashSet;
 import java.util.Iterator;
 
 public abstract class Atom implements Placeable {
-    private final byte valence;
-    private final byte atomicNumber;
-    private final String name;
     private final HashSet<Connection> connections;
     private byte numOfFreeElectrons;
     public static final byte FREE_ELECTRON_DECREASING_ERROR_CODE = -1;
 
-    public Atom(byte valence, byte atomicNumber, @NonNull String name) {
+    public Atom(byte valence) {
         if (valence > 0) {
-            this.valence = valence;
+            numOfFreeElectrons = valence;
         } else {
             throw new IllegalArgumentException("Valence must be > 0");
         }
-        if (atomicNumber > 0) {
-            this.atomicNumber = atomicNumber;
-        } else {
-            throw new IllegalArgumentException("Atomic number must be > 0");
-        }
-        this.name = name;
-        numOfFreeElectrons = valence;
         connections = new HashSet<>();
     }
 
-    public byte getAtomicNumber() {
-        return atomicNumber;
-    }
+    public abstract byte getAtomicNumber();
 
-    public byte getValence() {
-        return valence;
-    }
+    public abstract byte getValence();
 
-    public String getName() {
-        return name;
-    }
+    public abstract String getName();
 
     public byte getNumOfFreeElectrons() {
         return numOfFreeElectrons;
