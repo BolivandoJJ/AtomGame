@@ -2,9 +2,11 @@ package com.example.atomgame;
 
 import androidx.annotation.NonNull;
 
+import com.example.atomgame.atom.Atom;
+
 public class Connection implements Placeable {
     private byte type;
-    private Atom [] connectedAtoms;
+    private Atom[] connectedAtoms;
     public static final byte MAX_CONNECTION_TYPE_VALUE = 3;
     public static final byte MIN_CONNECTION_TYPE_VALUE = 1;
     public static final byte INCREMENTING_ERROR_CODE = -1;

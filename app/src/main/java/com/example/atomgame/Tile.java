@@ -2,6 +2,8 @@ package com.example.atomgame;
 
 import androidx.annotation.NonNull;
 
+import com.example.atomgame.atom.Atom;
+
 public class Tile {
     private Atom placedAtom;
     private final short xCoord;

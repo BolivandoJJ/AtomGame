@@ -1,4 +1,7 @@
-package com.example.atomgame;
+package com.example.atomgame.atom;
+
+import com.example.atomgame.Connection;
+import com.example.atomgame.Placeable;
 
 import java.util.HashSet;
 import java.util.Iterator;

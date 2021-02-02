@@ -2,8 +2,9 @@ package com.example.atomgame;
 
 import androidx.annotation.NonNull;
 
+import com.example.atomgame.atom.Atom;
+
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 public class PickedAtomicStructure extends AtomicStructure{
