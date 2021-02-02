@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public abstract class Atom {
+public abstract class Atom implements Placeable {
     private final byte valence;
     private final byte atomicNumber;
     private final String name;

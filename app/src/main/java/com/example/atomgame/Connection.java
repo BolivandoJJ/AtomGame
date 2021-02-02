@@ -2,7 +2,7 @@ package com.example.atomgame;
 
 import androidx.annotation.NonNull;
 
-public class Connection {
+public class Connection implements Placeable {
     private byte type;
     private Atom [] connectedAtoms;
     public static final byte MAX_CONNECTION_TYPE_VALUE = 3;
