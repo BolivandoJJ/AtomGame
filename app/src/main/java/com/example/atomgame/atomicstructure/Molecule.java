@@ -1,10 +1,11 @@
-package com.example.atomgame;
+package com.example.atomgame.atomicstructure;
 
 import androidx.annotation.NonNull;
 
 import com.example.atomgame.atom.Atom;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Molecule extends AtomicStructure {
@@ -16,5 +17,17 @@ public class Molecule extends AtomicStructure {
         super(structure, skeleton, isCycled);
         this.radicals = radicals;
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LinkedList<Iterator<Radical>> getRadicalIteratorList() {
+        LinkedList<Iterator<Radical>> radicalIteratorList = new LinkedList<>();
+        for (HashSet<Radical> radicalSet : radicals) {
+            radicalIteratorList.add(radicalSet.iterator());
+        }
+        return radicalIteratorList;
     }
 }

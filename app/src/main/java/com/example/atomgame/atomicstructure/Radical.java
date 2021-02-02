@@ -1,4 +1,4 @@
-package com.example.atomgame;
+package com.example.atomgame.atomicstructure;
 
 import androidx.annotation.NonNull;
 
@@ -14,5 +14,9 @@ public class Radical extends AtomicStructure {
                    @NonNull LinkedList<Atom> skeleton, boolean isCycled) {
         super(structure, skeleton, isCycled);
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

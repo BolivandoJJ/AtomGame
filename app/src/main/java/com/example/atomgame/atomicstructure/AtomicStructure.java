@@ -1,4 +1,4 @@
-package com.example.atomgame;
+package com.example.atomgame.atomicstructure;
 
 import androidx.annotation.NonNull;
 
