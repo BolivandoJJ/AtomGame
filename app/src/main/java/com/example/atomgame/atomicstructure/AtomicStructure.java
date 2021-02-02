@@ -7,6 +7,7 @@ import com.example.atomgame.atom.Atom;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 public abstract class AtomicStructure {
     private final ArrayList<Atom> skeleton;
@@ -26,8 +27,8 @@ public abstract class AtomicStructure {
         return skeletonIsCycled;
     }
 
-    public Iterator<Atom> getSkeletonIterator() {
-        return skeleton.iterator();
+    public ListIterator<Atom> getSkeletonListIterator() {
+        return skeleton.listIterator();
     }
 
     public Iterator<Atom> getStructureIterator() {
