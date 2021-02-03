@@ -9,19 +9,19 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class Molecule extends AtomicStructure {
-    private final ArrayList<HashSet<Radical>> radicals;
+    private final ArrayList<HashSet<FunctionalGroup>> functionalGroups;
 
-    public Molecule(@NonNull HashSet<Atom> atomSet, @NonNull ArrayList<HashSet<Radical>> radicals,
+    public Molecule(@NonNull HashSet<Atom> atomSet, @NonNull ArrayList<HashSet<FunctionalGroup>> functionalGroups,
                     @NonNull ArrayList<Atom> skeleton, boolean isCycled, @NonNull String name) {
         super(atomSet, name, skeleton, isCycled);
-        this.radicals = radicals;
+        this.functionalGroups = functionalGroups;
     }
 
-    public ArrayList<Iterator<Radical>> getRadicalIteratorList() {
-        ArrayList<Iterator<Radical>> radicalIteratorList = new ArrayList<>();
-        for (HashSet<Radical> radicalSet : radicals) {
-            radicalIteratorList.add(radicalSet.iterator());
+    public ArrayList<Iterator<FunctionalGroup>> getFunctionalGrouplIteratorList() {
+        ArrayList<Iterator<FunctionalGroup>> functionalGroupIteratorList = new ArrayList<>();
+        for (HashSet<FunctionalGroup> functionalGroupSet : functionalGroups) {
+            functionalGroupIteratorList.add(functionalGroupSet.iterator());
         }
-        return radicalIteratorList;
+        return functionalGroupIteratorList;
     }
 }
