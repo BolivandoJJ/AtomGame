@@ -2,9 +2,9 @@ package com.example.atomgame.atom;
 
 // Nitrogen
 public class N extends Atom {
-    public static final String ATOM_NAME = "C";
-    public static final byte ATOMIC_NUMBER = 6;
-    public static final byte VALENCE = 4;
+    public static final String ATOM_NAME = "N";
+    public static final byte ATOMIC_NUMBER = 7;
+    public static final byte VALENCE = 3;
 
     public N() {
         super(VALENCE);
