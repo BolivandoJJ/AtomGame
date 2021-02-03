@@ -11,9 +11,9 @@ import java.util.Iterator;
 public class Molecule extends AtomicStructure {
     private final ArrayList<HashSet<Radical>> radicals;
 
-    public Molecule(@NonNull HashSet<Atom> structure, @NonNull ArrayList<HashSet<Radical>> radicals,
+    public Molecule(@NonNull HashSet<Atom> atomSet, @NonNull ArrayList<HashSet<Radical>> radicals,
                     @NonNull ArrayList<Atom> skeleton, boolean isCycled, @NonNull String name) {
-        super(structure, name, skeleton, isCycled);
+        super(atomSet, name, skeleton, isCycled);
         this.radicals = radicals;
     }
 
