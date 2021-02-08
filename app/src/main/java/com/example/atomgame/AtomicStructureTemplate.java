@@ -9,16 +9,34 @@ import java.util.HashSet;
 public class AtomicStructureTemplate {
     public final String name;
     public final byte[][] connectionMatrix;
+    /**
+     * functional group example:
+     * (unfilled connections are considered hydrogen connections)
+     *    X2
+     *    |
+     * R-X1=X3
+     * adjacency matrix:
+     *  R
+     * Z10	X1
+     * Z20	Z21	X2
+     * Z30	Z31	Z32	X3
+     * array:
+     * {{RADICAL},{Z10,X1},{Z20,Z21,X2},{Z30,Z31,Z32,X3}}
+     * Z - connection type
+     * Z10 = 1, Z20 = 0, Z30 = 0, Z21 = 1, Z31 = 2, Z32 = 0
+     */
 
     private static final byte O = com.example.atomgame.atom.O.ATOMIC_NUMBER;
     private static final byte C = com.example.atomgame.atom.C.ATOMIC_NUMBER;
     private static final byte N = com.example.atomgame.atom.N.ATOMIC_NUMBER;
+    private static final byte RADICAL = -1; //radical identifier
 
     private static Resources resources;
     public static final HashSet<AtomicStructureTemplate> simpleMoleculeSet;
     public static final HashSet<AtomicStructureTemplate> functionalGroupSet;
 
-
+    // AtomicStructureTemplate class must(!) be initialized before instantiating
+    // this method creates sets of atomic structure templates
     public static boolean init(@NonNull Resources resources) {
         if (resources != null) {
             AtomicStructureTemplate.resources = resources;
@@ -53,31 +71,31 @@ public class AtomicStructureTemplate {
 
     private static void initFunctionalGroupSet() {
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_hydroxyl),
-                new byte[][] {{1,O}}));
+                new byte[][] {{RADICAL},{1,O}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_hydroperoxide),
-                new byte[][] {{1,O},{0,1,O}}));
+                new byte[][] {{RADICAL},{1,O},{0,1,O}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_carbonyl),
-                new byte[][] {{2,O}}));
+                new byte[][] {{RADICAL},{2,O}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_imine),
-                new byte[][] {{2,N}}));
+                new byte[][] {{RADICAL},{2,N}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_amine),
-                new byte[][] {{1,N}}));
+                new byte[][] {{RADICAL},{1,N}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_hydrazone),
-                new byte[][] {{2,N},{0,1,N}}));
+                new byte[][] {{RADICAL},{2,N},{0,1,N}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_nitroso_group),
-                new byte[][] {{1,N},{0,2,O}}));
+                new byte[][] {{RADICAL},{1,N},{0,2,O}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_isocyanate),
-                new byte[][] {{1,N},{0,2,C},{0,0,2,O}}));
+                new byte[][] {{RADICAL},{1,N},{0,2,C},{0,0,2,O}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_oxime),
-                new byte[][] {{2,N},{0,1,O}}));
+                new byte[][] {{RADICAL},{2,N},{0,1,O}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_nitrile),
-                new byte[][] {{1,C},{0,3,N}}));
+                new byte[][] {{RADICAL},{1,C},{0,3,N}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_carboxyl),
-                new byte[][] {{1,C},{0,2,O},{0,1,0,O}}));
+                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_amide),
-                new byte[][] {{1,C},{0,2,O},{0,1,0,N}}));
+                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_hydrazide),
-                new byte[][] {{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,N}}));
+                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,N}}));
     }
 
     public AtomicStructureTemplate(@NonNull String name, @NonNull byte[][] connectionMatrix) {
