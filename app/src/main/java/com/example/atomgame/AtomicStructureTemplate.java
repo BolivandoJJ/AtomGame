@@ -32,13 +32,13 @@ public class AtomicStructureTemplate {
     private static final byte RADICAL = -1; //radical identifier
 
     private static Resources resources;
-    public static final HashSet<AtomicStructureTemplate> simpleMoleculeSet;
-    public static final HashSet<AtomicStructureTemplate> functionalGroupSet;
+    public static final HashSet<AtomicStructureTemplate> simpleMoleculeSet = new HashSet<>();
+    public static final HashSet<AtomicStructureTemplate> functionalGroupSet = new HashSet<>();
 
     // AtomicStructureTemplate class must(!) be initialized before instantiating
     // this method creates sets of atomic structure templates
     public static boolean init(@NonNull Resources resources) {
-        if (resources != null) {
+        if (AtomicStructureTemplate.resources == null) {
             AtomicStructureTemplate.resources = resources;
             initSimpleMoleculeSet();
             initFunctionalGroupSet();
@@ -98,7 +98,7 @@ public class AtomicStructureTemplate {
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,N}}));
     }
 
-    public AtomicStructureTemplate(@NonNull String name, @NonNull byte[][] connectionMatrix) {
+    private AtomicStructureTemplate(@NonNull String name, @NonNull byte[][] connectionMatrix) {
         this.name = name;
         this.connectionMatrix = connectionMatrix;
     }
