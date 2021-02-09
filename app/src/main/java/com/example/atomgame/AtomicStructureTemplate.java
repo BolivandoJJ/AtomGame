@@ -35,7 +35,7 @@ public class AtomicStructureTemplate {
     public static final HashSet<AtomicStructureTemplate> simpleMoleculeSet = new HashSet<>();
     public static final HashSet<AtomicStructureTemplate> functionalGroupSet = new HashSet<>();
 
-    // AtomicStructureTemplate class must(!) be initialized before instantiating
+    // AtomicStructureTemplate class must(!) be initialized before using
     // this method creates sets of atomic structure templates
     public static boolean init(@NonNull Resources resources) {
         if (AtomicStructureTemplate.resources == null) {
