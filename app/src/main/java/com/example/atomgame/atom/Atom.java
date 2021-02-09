@@ -34,6 +34,10 @@ public abstract class Atom implements Placeable {
         return connections.iterator();
     }
 
+    public boolean containsConnection(Connection connection) {
+        return connections.contains(connection);
+    }
+
     public boolean addConnection(Connection connection) {
         numOfFreeElectrons -= connection.getType();
         return connections.add(connection);
