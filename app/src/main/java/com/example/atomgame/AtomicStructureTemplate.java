@@ -106,11 +106,20 @@ public class AtomicStructureTemplate {
         this.connectionMatrix = connectionMatrix;
     }
 
+    // resources != null, when the class is initialized
     public Iterator<AtomicStructureTemplate> getSimpleMoleculeSetIterator() {
-        return simpleMoleculeSet.iterator();
+        if (resources != null) {
+            return simpleMoleculeSet.iterator();
+        } else {
+            throw new IllegalStateException("AtomiсStructureTemplate was not initialize");
+        }
     }
 
     public Iterator<AtomicStructureTemplate> getFunctionalGroupSetIterator() {
-        return functionalGroupSet.iterator();
+        if (resources != null) {
+            return functionalGroupSet.iterator();
+        } else {
+            throw new IllegalStateException("AtomiсStructureTemplate was not initialize");
+        }
     }
 }
