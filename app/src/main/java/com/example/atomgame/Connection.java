@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 
 import com.example.atomgame.atom.Atom;
 
+import java.util.Arrays;
+
 public class Connection implements Placeable {
     private byte type;
     private Atom[] connectedAtoms;
@@ -18,6 +20,10 @@ public class Connection implements Placeable {
     public Connection(byte type, @NonNull Atom atom1, @NonNull Atom atom2) {
         setType(type);
         connectAtoms(atom1, atom2);
+    }
+
+    public Atom[] getConnectedAtoms() {
+        return Arrays.copyOf(connectedAtoms, connectedAtoms.length);
     }
 
     private void connectAtoms(Atom atom1, Atom atom2) {
