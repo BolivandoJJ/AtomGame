@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import androidx.annotation.NonNull;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class AtomicStructureTemplate {
     public final String name;
@@ -32,8 +33,8 @@ public class AtomicStructureTemplate {
     private static final byte RADICAL = -1; //radical identifier
 
     private static Resources resources;
-    public static final HashSet<AtomicStructureTemplate> simpleMoleculeSet = new HashSet<>();
-    public static final HashSet<AtomicStructureTemplate> functionalGroupSet = new HashSet<>();
+    private static final HashSet<AtomicStructureTemplate> simpleMoleculeSet = new HashSet<>();
+    private static final HashSet<AtomicStructureTemplate> functionalGroupSet = new HashSet<>();
 
     // AtomicStructureTemplate class must(!) be initialized before using
     // this method creates sets of atomic structure templates
@@ -103,5 +104,13 @@ public class AtomicStructureTemplate {
     private AtomicStructureTemplate(@NonNull String name, @NonNull byte[][] connectionMatrix) {
         this.name = name;
         this.connectionMatrix = connectionMatrix;
+    }
+
+    public Iterator<AtomicStructureTemplate> getSimpleMoleculeSetIterator() {
+        return simpleMoleculeSet.iterator();
+    }
+
+    public Iterator<AtomicStructureTemplate> getFunctionalGroupSetIterator() {
+        return functionalGroupSet.iterator();
     }
 }
