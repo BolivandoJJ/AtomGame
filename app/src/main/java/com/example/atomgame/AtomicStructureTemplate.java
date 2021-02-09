@@ -59,6 +59,8 @@ public class AtomicStructureTemplate {
                 new byte[][] {{O},{1,O}}));
         simpleMoleculeSet.add(new AtomicStructureTemplate(resources.getString(R.string.molecule_name_nitroxyl),
                 new byte[][] {{N},{2,O}}));
+        simpleMoleculeSet.add(new AtomicStructureTemplate(resources.getString(R.string.molecule_name_nitroxyl),
+                new byte[][] {{O},{2,N}}));
         simpleMoleculeSet.add(new AtomicStructureTemplate(resources.getString(R.string.molecule_name_ozone),
                 new byte[][] {{O},{1,O},{1,1,O}}));
         simpleMoleculeSet.add(new AtomicStructureTemplate(resources.getString(R.string.molecule_name_nitrogen),
