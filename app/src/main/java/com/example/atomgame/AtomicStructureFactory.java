@@ -32,6 +32,7 @@ public class AtomicStructureFactory {
     }
 
     private void parseSkeleton() {
+        createSkeletonTemplate();
         if (skeletonIsCycled) {
             parseCycledSkeleton();
         } else {
@@ -120,11 +121,11 @@ public class AtomicStructureFactory {
         }
     }
 
-    public Molecule getMolecule(FunctionalGroup functionalGroups) {
+    public Molecule getMolecule(@NonNull FunctionalGroup functionalGroups) {
 
     }
 
-    private static boolean compare2dArrays(byte[][] array1, byte[][] array2) {
+    private static boolean compare2dArrays(@NonNull byte[][] array1, @NonNull byte[][] array2) {
         boolean arraysAreEquals = true;
         if (array1.length == array2.length) {
             for (int i = 0; i < array1.length; i++) {
