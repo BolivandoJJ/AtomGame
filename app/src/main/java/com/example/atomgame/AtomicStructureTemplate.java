@@ -111,7 +111,7 @@ public class AtomicStructureTemplate {
         if (resources != null) {
             return simpleMoleculeSet.iterator();
         } else {
-            throw new IllegalStateException("AtomiсStructureTemplate was not initialize");
+            throw new IllegalStateException("AtomicStructureTemplate was not initialize");
         }
     }
 
@@ -119,7 +119,7 @@ public class AtomicStructureTemplate {
         if (resources != null) {
             return functionalGroupSet.iterator();
         } else {
-            throw new IllegalStateException("AtomiсStructureTemplate was not initialize");
+            throw new IllegalStateException("AtomicStructureTemplate was not initialize");
         }
     }
 }
