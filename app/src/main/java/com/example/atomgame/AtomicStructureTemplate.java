@@ -4,12 +4,13 @@ import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 
 public class AtomicStructureTemplate {
-    public final String name;
-    public final byte[][] connectionMatrix;
+    private final String name;
+    private final byte[][] connectionMatrix;
     /**
      * functional group example:
      * (unfilled connections are considered hydrogen connections)
@@ -115,8 +116,16 @@ public class AtomicStructureTemplate {
         this.connectionMatrix = connectionMatrix;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public byte[][] getConnectionMatrix() {
+        return Arrays.copyOf(connectionMatrix, connectionMatrix.length);
+    }
+
     // resources != null, when the class is initialized
-    public Iterator<AtomicStructureTemplate> getSimpleMoleculeSetIterator() {
+    public static Iterator<AtomicStructureTemplate> getSimpleMoleculeSetIterator() {
         if (resources != null) {
             return simpleMoleculeSet.iterator();
         } else {
@@ -124,7 +133,7 @@ public class AtomicStructureTemplate {
         }
     }
 
-    public Iterator<AtomicStructureTemplate> getFunctionalGroupSetIterator() {
+    public static Iterator<AtomicStructureTemplate> getFunctionalGroupSetIterator() {
         if (resources != null) {
             return functionalGroupSet.iterator();
         } else {
