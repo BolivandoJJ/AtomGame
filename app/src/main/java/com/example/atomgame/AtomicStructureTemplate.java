@@ -41,15 +41,24 @@ public class AtomicStructureTemplate {
     public static boolean init(@NonNull Resources resources) {
         if (AtomicStructureTemplate.resources == null) {
             AtomicStructureTemplate.resources = resources;
-            initSimpleMoleculeSet();
-            initFunctionalGroupSet();
+            // multithreaded set creation
+            Thread simpleMoleculeSetCreatingThread = new Thread(AtomicStructureTemplate::createSimpleMoleculeSet);
+            simpleMoleculeSetCreatingThread.start();
+            Thread functionalGroupSetCreatingThread = new Thread(AtomicStructureTemplate::createFunctionalGroupSet);
+            functionalGroupSetCreatingThread.start();
+            try {
+                simpleMoleculeSetCreatingThread.join();
+                functionalGroupSetCreatingThread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return true;
         } else {
             return false;
         }
     }
 
-    private static void initSimpleMoleculeSet() {
+    private static void createSimpleMoleculeSet() {
         simpleMoleculeSet.add(new AtomicStructureTemplate(resources.getString(R.string.molecule_name_water),
                 new byte[][] {{O}}));
         simpleMoleculeSet.add(new AtomicStructureTemplate(resources.getString(R.string.molecule_name_carbon_dioxide),
@@ -72,7 +81,7 @@ public class AtomicStructureTemplate {
                 new byte[][] {{N},{2,N}}));
     }
 
-    private static void initFunctionalGroupSet() {
+    private static void createFunctionalGroupSet() {
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_hydroxyl),
                 new byte[][] {{RADICAL},{1,O}}));
         functionalGroupSet.add(new AtomicStructureTemplate(resources.getString(R.string.functional_group_name_hydroperoxide),
