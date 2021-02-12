@@ -112,6 +112,29 @@ public class AtomicStructureTemplate<E extends Enum<E>> {
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,N}}, FunctionalGroupType.HYDRAZIDE));
     }
 
+    private static void createLinearMoleculeSet() {
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL}}, MoleculeType.ALKANE));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{2, RADICAL}}, MoleculeType.ALKENE));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{2, RADICAL},{0,2,RADICAL}}, MoleculeType.DIENE));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{3, RADICAL}}, MoleculeType.ALKYNE));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,O},{0,1,RADICAL}}, MoleculeType.ETHER));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,O},{0,1,O},{0,0,1,RADICAL}}, MoleculeType.PEROXIDE));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{2,N},{0,1,RADICAL}}, MoleculeType.IMINE));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,N},{0,1,RADICAL}}, MoleculeType.AMINE));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,RADICAL}}, MoleculeType.AMIDE));
+        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,RADICAL}}, MoleculeType.ESTER));
+    }
+
     public AtomicStructureTemplate(@NonNull byte[][] connectionMatrix, @NonNull E type) {
         this.connectionMatrix = connectionMatrix;
         this.type = type;
@@ -131,5 +154,9 @@ public class AtomicStructureTemplate<E extends Enum<E>> {
 
     public static Iterator<AtomicStructureTemplate<FunctionalGroupType>> getFunctionalGroupSetIterator() {
         return functionalGroupSet.iterator();
+    }
+    
+    public static Iterator<AtomicStructureTemplate<MoleculeType>> getLinearMoleculeSetIterator() {
+        return linearMoleculeSet.iterator();
     }
 }
