@@ -3,6 +3,7 @@ package com.example.atomgame.atomicstructure;
 import androidx.annotation.NonNull;
 
 import com.example.atomgame.atom.Atom;
+import com.example.atomgame.atomicstructure.type.FunctionalGroupType;
 
 import java.util.ArrayList;
 import java.util.HashSet;

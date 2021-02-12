@@ -2,8 +2,8 @@ package com.example.atomgame;
 
 import androidx.annotation.NonNull;
 
-import com.example.atomgame.atomicstructure.FunctionalGroupType;
-import com.example.atomgame.atomicstructure.SimpleMoleculeGroupType;
+import com.example.atomgame.atomicstructure.type.FunctionalGroupType;
+import com.example.atomgame.atomicstructure.type.SimpleMoleculeGroupType;
 
 import java.util.Arrays;
 import java.util.HashSet;

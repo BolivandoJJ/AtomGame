@@ -1,4 +1,4 @@
-package com.example.atomgame.atomicstructure;
+package com.example.atomgame.atomicstructure.type;
 
 public enum FunctionalGroupType {
     HYDROXYL,
