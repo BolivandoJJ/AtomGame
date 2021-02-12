@@ -3,6 +3,7 @@ package com.example.atomgame;
 import androidx.annotation.NonNull;
 
 import com.example.atomgame.atomicstructure.type.FunctionalGroupType;
+import com.example.atomgame.atomicstructure.type.MoleculeType;
 import com.example.atomgame.atomicstructure.type.SimpleMoleculeGroupType;
 
 import java.util.Arrays;
@@ -36,19 +37,26 @@ public class AtomicStructureTemplate<E extends Enum<E>> {
 
     private static final HashSet<AtomicStructureTemplate<SimpleMoleculeGroupType>> simpleMoleculeSet = new HashSet<>();
     private static final HashSet<AtomicStructureTemplate<FunctionalGroupType>> functionalGroupSet = new HashSet<>();
+    private static final HashSet<AtomicStructureTemplate<MoleculeType>>  linearMoleculeSet = new HashSet<>();
 
     //creating sets of atomic structure templates
     static {
-        // multithreaded set creation
-        Thread simpleMoleculeSetCreatingThread = new Thread(AtomicStructureTemplate::createSimpleMoleculeSet);
-        simpleMoleculeSetCreatingThread.start();
-        Thread functionalGroupSetCreatingThread = new Thread(AtomicStructureTemplate::createFunctionalGroupSet);
-        functionalGroupSetCreatingThread.start();
-        try {
-            simpleMoleculeSetCreatingThread.join();
-            functionalGroupSetCreatingThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        runMultipleThreads(
+                new Thread(AtomicStructureTemplate::createSimpleMoleculeSet),
+                new Thread(AtomicStructureTemplate::createFunctionalGroupSet),
+                new Thread(AtomicStructureTemplate::createLinearMoleculeSet));
+    }
+
+    private static void runMultipleThreads(Thread... threads) {
+        for (Thread t : threads) {
+            t.start();
+        }
+        for (Thread t : threads) {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
