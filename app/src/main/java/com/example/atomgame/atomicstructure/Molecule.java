@@ -5,17 +5,17 @@ import androidx.annotation.Nullable;
 
 import com.example.atomgame.AtomicStructureTemplate;
 import com.example.atomgame.atom.Atom;
-import com.example.atomgame.atomicstructure.type.MoleculeType;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Molecule extends AtomicStructure {
+public class Molecule<T extends Enum<T>> extends AtomicStructure {
     private final FunctionalGroup functionalGroup;
-    private final AtomicStructureTemplate<MoleculeType> moleculeTemplate;
+    private final AtomicStructureTemplate<T> moleculeTemplate;
 
     public Molecule(@NonNull HashSet<Atom> atomSet, @Nullable FunctionalGroup functionalGroup,
-                    @NonNull ArrayList<Atom> skeleton, boolean isCycled, @NonNull String name, @NonNull AtomicStructureTemplate<MoleculeType> moleculeTemplate) {
+                    @NonNull ArrayList<Atom> skeleton, boolean isCycled, @NonNull String name,
+                    @NonNull AtomicStructureTemplate<T> moleculeTemplate) {
         super(atomSet, name, skeleton, isCycled);
         this.functionalGroup = functionalGroup;
         this.moleculeTemplate = moleculeTemplate;
@@ -25,7 +25,7 @@ public class Molecule extends AtomicStructure {
         return functionalGroup;
     }
 
-    public AtomicStructureTemplate<MoleculeType> getMoleculeTemplate() {
+    public AtomicStructureTemplate<T> getMoleculeTemplate() {
         return moleculeTemplate;
     }
 }
