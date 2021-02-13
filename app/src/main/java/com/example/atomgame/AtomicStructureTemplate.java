@@ -33,7 +33,7 @@ public class AtomicStructureTemplate<E extends Enum<E>> {
     private static final byte O = com.example.atomgame.atom.O.ATOMIC_NUMBER;
     private static final byte C = com.example.atomgame.atom.C.ATOMIC_NUMBER;
     private static final byte N = com.example.atomgame.atom.N.ATOMIC_NUMBER;
-    private static final byte RADICAL = -1; //radical identifier
+    private static final byte RADICAL = Byte.MIN_VALUE; //radical identifier
 
     private static final HashSet<AtomicStructureTemplate<SimpleMoleculeGroupType>> simpleMoleculeSet = new HashSet<>();
     private static final HashSet<AtomicStructureTemplate<FunctionalGroupType>> functionalGroupSet = new HashSet<>();
@@ -135,9 +135,36 @@ public class AtomicStructureTemplate<E extends Enum<E>> {
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,RADICAL}}, MoleculeType.ESTER));
     }
 
-    public AtomicStructureTemplate(@NonNull byte[][] connectionMatrix, @NonNull E type) {
+    private AtomicStructureTemplate(@NonNull byte[][] connectionMatrix, @NonNull E type) {
         this.connectionMatrix = connectionMatrix;
         this.type = type;
+    }
+
+    public AtomicStructureTemplate(@NonNull AtomicStructureTemplate<MoleculeType> sourceTemplate, @NonNull byte... radicalLengths) {
+        byte[][] matrix = sourceTemplate.getConnectionMatrix();
+        // checking input for negative values
+        for (byte radicalLength : radicalLengths) {
+            if (radicalLength < 1) {
+                throw new IllegalArgumentException("The radical length must be above zero");
+            }
+        }
+        // checking number of input values and adding lengths of radicals to matrix
+        byte numOfRadicals = 0;
+        for (byte i = 0; i < matrix.length; i++) {
+            if (matrix[i][i] == RADICAL) {
+                numOfRadicals++;
+                try {
+                    matrix[i][i] = radicalLengths[i];
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new IllegalArgumentException("The number of length parameters less than the number of radicals", e);
+                }
+            }
+        }
+        if (radicalLengths.length != numOfRadicals) {
+            throw new IllegalArgumentException("The number of length parameters exceeds the number of radicals");
+        }
+        this.connectionMatrix = matrix;
+        this.type = (E) sourceTemplate.getType();
     }
 
     public E getType() {
