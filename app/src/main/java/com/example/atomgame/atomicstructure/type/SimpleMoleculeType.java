@@ -1,6 +1,6 @@
 package com.example.atomgame.atomicstructure.type;
 
-public enum SimpleMoleculeGroupType {
+public enum SimpleMoleculeType {
     WATER,
     CARBON_DIOXIDE,
     AMMONIA,

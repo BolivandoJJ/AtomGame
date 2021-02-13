@@ -1,6 +1,6 @@
 package com.example.atomgame.atomicstructure.type;
 
-public enum MoleculeType {
+public enum LinearMoleculeType {
     ALKANE,
     ALKENE,
     ALKYNE,
