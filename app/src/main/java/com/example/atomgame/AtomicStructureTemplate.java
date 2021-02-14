@@ -36,17 +36,14 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
 
     private static final HashSet<AtomicStructureTemplate<FunctionalGroupType>> functionalGroupSet = new HashSet<>();
     private static final HashSet<AtomicStructureTemplate<MoleculeType>> simpleMoleculeSet = new HashSet<>();
-    private static final HashSet<AtomicStructureTemplate<MoleculeType>>  linearMoleculeSet = new HashSet<>();
-    private static final HashSet<AtomicStructureTemplate<MoleculeType>>  cyclicMoleculeSet = new HashSet<>();
+    private static final HashSet<AtomicStructureTemplate<MoleculeType>> moleculeSet = new HashSet<>();
 
     //creating sets of atomic structure templates
     static {
         runMultipleThreads(
                 new Thread(AtomicStructureTemplate::createSimpleMoleculeSet),
                 new Thread(AtomicStructureTemplate::createFunctionalGroupSet),
-                new Thread(AtomicStructureTemplate::createLinearMoleculeSet),
-                new Thread(AtomicStructureTemplate::createCyclicMoleculeSet));
-
+                new Thread(AtomicStructureTemplate::createMoleculeSet));
     }
 
     private static void runMultipleThreads(Thread... threads) {
@@ -114,31 +111,27 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,N}}, FunctionalGroupType.HYDRAZIDE));
     }
 
-    private static void createLinearMoleculeSet() {
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+    private static void createMoleculeSet() {
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL}}, MoleculeType.ALKANE));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{2, RADICAL}}, MoleculeType.ALKENE));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{2, RADICAL},{0,2,RADICAL}}, MoleculeType.DIENE));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{3, RADICAL}}, MoleculeType.ALKYNE));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,O},{0,1,RADICAL}}, MoleculeType.ETHER));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,O},{0,1,O},{0,0,1,RADICAL}}, MoleculeType.PEROXIDE));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{2,N},{0,1,RADICAL}}, MoleculeType.IMINE));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,N},{0,1,RADICAL}}, MoleculeType.AMINE));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,RADICAL}}, MoleculeType.AMIDE));
-        linearMoleculeSet.add(new AtomicStructureTemplate<>(
+        moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,RADICAL}}, MoleculeType.ESTER));
-    }
-
-    private static void createCyclicMoleculeSet() {
-
     }
 
     public AtomicStructureTemplate(@NonNull byte[][] connectionMatrix, @NonNull T type) {
@@ -162,11 +155,7 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
         return functionalGroupSet.iterator();
     }
     
-    public static Iterator<AtomicStructureTemplate<MoleculeType>> getLinearMoleculeSetIterator() {
-        return linearMoleculeSet.iterator();
-    }
-
-    public static Iterator<AtomicStructureTemplate<MoleculeType>> getCyclicMoleculeSetIterator() {
-        return cyclicMoleculeSet.iterator();
+    public static Iterator<AtomicStructureTemplate<MoleculeType>> getMoleculeSetIterator() {
+        return moleculeSet.iterator();
     }
 }
