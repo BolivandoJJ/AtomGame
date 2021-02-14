@@ -1,6 +1,6 @@
 package com.example.atomgame.atomicstructure.type;
 
-public enum SimpleMoleculeType {
+public enum MoleculeType {
     WATER,
     CARBON_DIOXIDE,
     AMMONIA,
@@ -9,5 +9,16 @@ public enum SimpleMoleculeType {
     OZONE,
     NITROGEN,
     OXYGEN,
-    HYDRAZINE
+    HYDRAZINE,
+
+    ALKANE,
+    ALKENE,
+    ALKYNE,
+    DIENE,
+    ETHER,
+    PEROXIDE,
+    IMINE,
+    AMINE,
+    AMIDE,
+    ESTER
 }

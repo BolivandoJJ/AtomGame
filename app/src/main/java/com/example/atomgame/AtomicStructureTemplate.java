@@ -3,8 +3,7 @@ package com.example.atomgame;
 import androidx.annotation.NonNull;
 
 import com.example.atomgame.atomicstructure.type.FunctionalGroupType;
-import com.example.atomgame.atomicstructure.type.LinearMoleculeType;
-import com.example.atomgame.atomicstructure.type.SimpleMoleculeType;
+import com.example.atomgame.atomicstructure.type.MoleculeType;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -35,16 +34,19 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
     public static final byte N = com.example.atomgame.atom.N.ATOMIC_NUMBER;
     public static final byte RADICAL = Byte.MIN_VALUE; //radical identifier
 
-    private static final HashSet<AtomicStructureTemplate<SimpleMoleculeType>> simpleMoleculeSet = new HashSet<>();
     private static final HashSet<AtomicStructureTemplate<FunctionalGroupType>> functionalGroupSet = new HashSet<>();
-    private static final HashSet<AtomicStructureTemplate<LinearMoleculeType>>  linearMoleculeSet = new HashSet<>();
+    private static final HashSet<AtomicStructureTemplate<MoleculeType>> simpleMoleculeSet = new HashSet<>();
+    private static final HashSet<AtomicStructureTemplate<MoleculeType>>  linearMoleculeSet = new HashSet<>();
+    private static final HashSet<AtomicStructureTemplate<MoleculeType>>  cyclicMoleculeSet = new HashSet<>();
 
     //creating sets of atomic structure templates
     static {
         runMultipleThreads(
                 new Thread(AtomicStructureTemplate::createSimpleMoleculeSet),
                 new Thread(AtomicStructureTemplate::createFunctionalGroupSet),
-                new Thread(AtomicStructureTemplate::createLinearMoleculeSet));
+                new Thread(AtomicStructureTemplate::createLinearMoleculeSet),
+                new Thread(AtomicStructureTemplate::createCyclicMoleculeSet));
+
     }
 
     private static void runMultipleThreads(Thread... threads) {
@@ -62,25 +64,25 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
 
     private static void createSimpleMoleculeSet() {
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{O}}, SimpleMoleculeType.WATER));
+                new byte[][] {{O}}, MoleculeType.WATER));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{O},{2,C},{0,2,O}}, SimpleMoleculeType.CARBON_DIOXIDE));
+                new byte[][] {{O},{2,C},{0,2,O}}, MoleculeType.CARBON_DIOXIDE));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{N}}, SimpleMoleculeType.AMMONIA));
+                new byte[][] {{N}}, MoleculeType.AMMONIA));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{O},{1,O}}, SimpleMoleculeType.HYDROGEN_PEROXIDE));
+                new byte[][] {{O},{1,O}}, MoleculeType.HYDROGEN_PEROXIDE));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{N},{2,O}}, SimpleMoleculeType.NITROXYL));
+                new byte[][] {{N},{2,O}}, MoleculeType.NITROXYL));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{O},{2,N}}, SimpleMoleculeType.NITROXYL));
+                new byte[][] {{O},{2,N}}, MoleculeType.NITROXYL));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{O},{1,O},{1,1,O}}, SimpleMoleculeType.OZONE));
+                new byte[][] {{O},{1,O},{1,1,O}}, MoleculeType.OZONE));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{N},{3,N}}, SimpleMoleculeType.NITROGEN));
+                new byte[][] {{N},{3,N}}, MoleculeType.NITROGEN));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{O},{2,O}}, SimpleMoleculeType.OXYGEN));
+                new byte[][] {{O},{2,O}}, MoleculeType.OXYGEN));
         simpleMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{N},{2,N}}, SimpleMoleculeType.HYDRAZINE));
+                new byte[][] {{N},{2,N}}, MoleculeType.HYDRAZINE));
     }
 
     private static void createFunctionalGroupSet() {
@@ -114,25 +116,29 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
 
     private static void createLinearMoleculeSet() {
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL}}, LinearMoleculeType.ALKANE));
+                new byte[][] {{RADICAL}}, MoleculeType.ALKANE));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{2, RADICAL}}, LinearMoleculeType.ALKENE));
+                new byte[][] {{RADICAL},{2, RADICAL}}, MoleculeType.ALKENE));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{2, RADICAL},{0,2,RADICAL}}, LinearMoleculeType.DIENE));
+                new byte[][] {{RADICAL},{2, RADICAL},{0,2,RADICAL}}, MoleculeType.DIENE));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{3, RADICAL}}, LinearMoleculeType.ALKYNE));
+                new byte[][] {{RADICAL},{3, RADICAL}}, MoleculeType.ALKYNE));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,O},{0,1,RADICAL}}, LinearMoleculeType.ETHER));
+                new byte[][] {{RADICAL},{1,O},{0,1,RADICAL}}, MoleculeType.ETHER));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,O},{0,1,O},{0,0,1,RADICAL}}, LinearMoleculeType.PEROXIDE));
+                new byte[][] {{RADICAL},{1,O},{0,1,O},{0,0,1,RADICAL}}, MoleculeType.PEROXIDE));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{2,N},{0,1,RADICAL}}, LinearMoleculeType.IMINE));
+                new byte[][] {{RADICAL},{2,N},{0,1,RADICAL}}, MoleculeType.IMINE));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,N},{0,1,RADICAL}}, LinearMoleculeType.AMINE));
+                new byte[][] {{RADICAL},{1,N},{0,1,RADICAL}}, MoleculeType.AMINE));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,RADICAL}}, LinearMoleculeType.AMIDE));
+                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,RADICAL}}, MoleculeType.AMIDE));
         linearMoleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,RADICAL}}, LinearMoleculeType.ESTER));
+                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,RADICAL}}, MoleculeType.ESTER));
+    }
+
+    private static void createCyclicMoleculeSet() {
+
     }
 
     public AtomicStructureTemplate(@NonNull byte[][] connectionMatrix, @NonNull T type) {
@@ -148,7 +154,7 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
         return Arrays.copyOf(connectionMatrix, connectionMatrix.length);
     }
 
-    public static Iterator<AtomicStructureTemplate<SimpleMoleculeType>> getSimpleMoleculeSetIterator() {
+    public static Iterator<AtomicStructureTemplate<MoleculeType>> getSimpleMoleculeSetIterator() {
         return simpleMoleculeSet.iterator();
     }
 
@@ -156,7 +162,11 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
         return functionalGroupSet.iterator();
     }
     
-    public static Iterator<AtomicStructureTemplate<LinearMoleculeType>> getLinearMoleculeSetIterator() {
+    public static Iterator<AtomicStructureTemplate<MoleculeType>> getLinearMoleculeSetIterator() {
         return linearMoleculeSet.iterator();
+    }
+
+    public static Iterator<AtomicStructureTemplate<MoleculeType>> getCyclicMoleculeSetIterator() {
+        return cyclicMoleculeSet.iterator();
     }
 }

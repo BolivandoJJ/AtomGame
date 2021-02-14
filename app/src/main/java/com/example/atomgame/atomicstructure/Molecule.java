@@ -5,11 +5,12 @@ import androidx.annotation.Nullable;
 
 import com.example.atomgame.AtomicStructureTemplate;
 import com.example.atomgame.atom.Atom;
+import com.example.atomgame.atomicstructure.type.MoleculeType;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Molecule<T extends Enum<T>> extends AtomicStructure {
+public class Molecule extends AtomicStructure {
     private final FunctionalGroup functionalGroup;
     // Molecule formula is template, where RADICALs
     // are replaced by the length of the radicals taken with a negative sign
@@ -28,11 +29,11 @@ public class Molecule<T extends Enum<T>> extends AtomicStructure {
      *   formula's matrix:
      *   {{-1},{1,8},{0,1,-1}}
      */
-    private final AtomicStructureTemplate<T> moleculeFormula;
+    private final AtomicStructureTemplate<MoleculeType> moleculeFormula;
 
     public Molecule(@NonNull HashSet<Atom> atomSet, @Nullable FunctionalGroup functionalGroup,
                     @NonNull ArrayList<Atom> skeleton, boolean isCycled, @NonNull String name,
-                    @NonNull AtomicStructureTemplate<T> moleculeFormula) {
+                    @NonNull AtomicStructureTemplate<MoleculeType> moleculeFormula) {
         super(atomSet, name, skeleton, isCycled);
         this.functionalGroup = functionalGroup;
         this.moleculeFormula = moleculeFormula;
@@ -42,7 +43,7 @@ public class Molecule<T extends Enum<T>> extends AtomicStructure {
         return functionalGroup;
     }
 
-    public AtomicStructureTemplate<T> getMoleculeTemplate() {
+    public AtomicStructureTemplate<MoleculeType> getMoleculeTemplate() {
         return moleculeFormula;
     }
 }
