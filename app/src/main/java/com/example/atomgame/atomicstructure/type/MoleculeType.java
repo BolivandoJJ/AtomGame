@@ -1,24 +1,35 @@
 package com.example.atomgame.atomicstructure.type;
 
 public enum MoleculeType {
-    WATER,
-    CARBON_DIOXIDE,
-    AMMONIA,
-    HYDROGEN_PEROXIDE,
-    NITROXYL,
-    OZONE,
-    NITROGEN,
-    OXYGEN,
-    HYDRAZINE,
+    WATER(false),
+    CARBON_DIOXIDE(false),
+    AMMONIA(false),
+    HYDROGEN_PEROXIDE(false),
+    NITROXYL(false),
+    OZONE(false),
+    NITROGEN(false),
+    OXYGEN(false),
+    HYDRAZINE(false),
 
-    ALKANE,
-    ALKENE,
-    ALKYNE,
-    DIENE,
-    ETHER,
-    PEROXIDE,
-    IMINE,
-    AMINE,
-    AMIDE,
-    ESTER
+    ALKANE(true),
+    ALKENE(true),
+    ALKYNE(true),
+    DIENE(true),
+    ETHER(false),
+    PEROXIDE(false),
+    IMINE(false),
+    AMINE(false),
+    AMIDE(false),
+    ESTER(false),
+
+    BENZOLE(true);
+
+    private final boolean mayHaveFunctionalGroup;
+    MoleculeType(boolean mayHaveFunctionalGroup) {
+        this.mayHaveFunctionalGroup = mayHaveFunctionalGroup;
+    }
+
+    public boolean isMayHaveFunctionalGroup() {
+        return mayHaveFunctionalGroup;
+    }
 }
