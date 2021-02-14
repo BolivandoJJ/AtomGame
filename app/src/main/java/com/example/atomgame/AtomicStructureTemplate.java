@@ -14,7 +14,7 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
     private final byte[][] connectionMatrix;
     private final T type;
     /**
-     * functional group example:
+     * Template example (functional group):
      * (unfilled connections are considered hydrogen connections)
      *    X2
      *    |
@@ -30,10 +30,10 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
      * Z10 = 1, Z20 = 0, Z30 = 0, Z21 = 1, Z31 = 2, Z32 = 0
      */
 
-    private static final byte O = com.example.atomgame.atom.O.ATOMIC_NUMBER;
-    private static final byte C = com.example.atomgame.atom.C.ATOMIC_NUMBER;
-    private static final byte N = com.example.atomgame.atom.N.ATOMIC_NUMBER;
-    private static final byte RADICAL = Byte.MIN_VALUE; //radical identifier
+    public static final byte O = com.example.atomgame.atom.O.ATOMIC_NUMBER;
+    public static final byte C = com.example.atomgame.atom.C.ATOMIC_NUMBER;
+    public static final byte N = com.example.atomgame.atom.N.ATOMIC_NUMBER;
+    public static final byte RADICAL = Byte.MIN_VALUE; //radical identifier
 
     private static final HashSet<AtomicStructureTemplate<SimpleMoleculeType>> simpleMoleculeSet = new HashSet<>();
     private static final HashSet<AtomicStructureTemplate<FunctionalGroupType>> functionalGroupSet = new HashSet<>();
@@ -135,37 +135,9 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,RADICAL}}, LinearMoleculeType.ESTER));
     }
 
-    private AtomicStructureTemplate(@NonNull byte[][] connectionMatrix, @NonNull T type) {
+    public AtomicStructureTemplate(@NonNull byte[][] connectionMatrix, @NonNull T type) {
         this.connectionMatrix = connectionMatrix;
         this.type = type;
-    }
-
-    public AtomicStructureTemplate(@NonNull AtomicStructureTemplate<T> sourceTemplate,
-                                   @NonNull byte... radicalLengths) {
-        byte[][] matrix = sourceTemplate.getConnectionMatrix();
-        // checking input for negative values
-        for (byte radicalLength : radicalLengths) {
-            if (radicalLength < 1) {
-                throw new IllegalArgumentException("The radical length must be above zero");
-            }
-        }
-        // checking number of input values and adding lengths of radicals to matrix
-        byte numOfRadicals = 0;
-        for (byte i = 0; i < matrix.length; i++) {
-            if (matrix[i][i] == RADICAL) {
-                numOfRadicals++;
-                try {
-                    matrix[i][i] = radicalLengths[i];
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new IllegalArgumentException("The number of length parameters less than the number of radicals", e);
-                }
-            }
-        }
-        if (radicalLengths.length != numOfRadicals) {
-            throw new IllegalArgumentException("The number of length parameters exceeds the number of radicals");
-        }
-        this.connectionMatrix = matrix;
-        this.type = (T) sourceTemplate.getType();
     }
 
     public T getType() {
