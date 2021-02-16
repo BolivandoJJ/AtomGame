@@ -86,8 +86,6 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,O}}, FunctionalGroupType.HYDROXYL));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,O},{0,1,O}}, FunctionalGroupType.HYDROPEROXIDE));
-        functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{2,O}}, FunctionalGroupType.CARBONYL));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{2,N}}, FunctionalGroupType.IMINE));

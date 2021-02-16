@@ -2,7 +2,6 @@ package com.example.atomgame.atomicstructure.type;
 
 public enum FunctionalGroupType {
     HYDROXYL,
-    HYDROPEROXIDE,
     CARBONYL,
     IMINE,
     AMINE,
