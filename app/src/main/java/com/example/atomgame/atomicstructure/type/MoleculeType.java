@@ -21,8 +21,8 @@ public enum MoleculeType {
     AMINE(false),
     AMIDE(false),
     ESTER(false),
-
-    BENZOLE(true);
+    CARBONATE(false),
+    ANHYDRIDE(false);
 
     private final boolean mayHaveFunctionalGroup;
     MoleculeType(boolean mayHaveFunctionalGroup) {

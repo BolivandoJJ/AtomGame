@@ -86,15 +86,17 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,O}}, FunctionalGroupType.HYDROXYL));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,O},{0,1,O}}, FunctionalGroupType.HYDROPEROXY));
+        functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{2,O}}, FunctionalGroupType.CARBONYL));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{2,N}}, FunctionalGroupType.IMINE));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,N}}, FunctionalGroupType.AMINE));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{2,N},{0,1,N}}, FunctionalGroupType.HYDRAZONE));
-        functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,N},{0,2,O}}, FunctionalGroupType.NITROSO_GROUP));
+        functionalGroupSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,O},{0,1,C},{0,0,3,N}}, FunctionalGroupType.CYANATE));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,N},{0,2,C},{0,0,2,O}}, FunctionalGroupType.ISOCYANATE));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
@@ -102,11 +104,11 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,C},{0,3,N}}, FunctionalGroupType.NITRILE));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,O},{0,1,N},{0,0,2,O}}, FunctionalGroupType.NITRITE));
+        functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O}}, FunctionalGroupType.CARBOXYL));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N}}, FunctionalGroupType.AMIDE));
-        functionalGroupSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,N}}, FunctionalGroupType.HYDRAZIDE));
     }
 
     private static void createMoleculeSet() {
@@ -130,6 +132,10 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,RADICAL}}, MoleculeType.AMIDE));
         moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,RADICAL}}, MoleculeType.ESTER));
+        moleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,O},{0,1,C},{0,0,2,O},{0,0,1,0,O},{0,0,0,0,1,RADICAL}}, MoleculeType.CARBONATE));
+        moleculeSet.add(new AtomicStructureTemplate<>(
+                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,C},{0,0,0,0,2,O},{0,0,0,0,1,0,RADICAL}}, MoleculeType.ANHYDRIDE));
     }
 
     public AtomicStructureTemplate(@NonNull byte[][] connectionMatrix, @NonNull T type) {
