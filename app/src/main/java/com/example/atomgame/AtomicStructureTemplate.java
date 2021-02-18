@@ -106,9 +106,9 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
         functionalGroupSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,O},{0,1,N},{0,0,2,O}}, FunctionalGroupType.NITRITE));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O}}, FunctionalGroupType.CARBOXYL));
+                new byte[][] {{RADICAL},{2,O},{1,0,O}}, FunctionalGroupType.CARBOXYL));
         functionalGroupSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N}}, FunctionalGroupType.AMIDE));
+                new byte[][] {{RADICAL},{2,O},{1,0,N}}, FunctionalGroupType.AMIDE));
     }
 
     private static void createMoleculeSet() {
