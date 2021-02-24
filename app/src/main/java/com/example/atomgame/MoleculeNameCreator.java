@@ -29,9 +29,16 @@ public class MoleculeNameCreator {
     private static HashMap<MoleculeType, Byte> cyclicMoleculeRootIncrementationValues;
     private static HashMap<MoleculeType, String> simpleMoleculeNames;
 
+    // TODO: initialize collections
     public static void initResources(@NonNull Resources resources) {
+        if (!classInitialized) {
+            MoleculeNameCreator.resources = resources;
 
+            classInitialized = true;
+        }
     }
+
+
 
     public static String createMoleculeName(@NonNull AtomicStructureTemplate<MoleculeType> moleculeFormula,
                                             boolean moleculeIsCyclic,
@@ -78,11 +85,11 @@ public class MoleculeNameCreator {
                 return createStringFromRule(namingRule);
             }
         } else {
-            byte moleculeLength = getSumOfRadicalLengths(moleculeFormula);
-            if (moleculeLength <= 0) {
+            byte radicalLength = getSumOfRadicalLengths(moleculeFormula);
+            if (radicalLength <= 0) {
                 throw new IllegalArgumentException("Molecule formula must contain radicals with non-zero length");
             }
-            String root = aliphaticNamesRoots[moleculeLength];
+            String root = aliphaticNamesRoots[radicalLength];
             String[] namingRule;
             if (moleculeIsCyclic) {
                 namingRule = getCyclicMoleculeRule(type);
