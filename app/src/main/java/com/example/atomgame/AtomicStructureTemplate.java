@@ -129,9 +129,9 @@ public class AtomicStructureTemplate<T extends Enum<T>> {
         moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,N},{0,1,RADICAL}}, MoleculeType.AMINE));
         moleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,N},{0,0,0,1,RADICAL}}, MoleculeType.AMIDE));
+                new byte[][] {{RADICAL},{2,O},{1,0,N},{0,0,1,RADICAL}}, MoleculeType.AMIDE));
         moleculeSet.add(new AtomicStructureTemplate<>(
-                new byte[][] {{RADICAL},{1,C},{0,2,O},{0,1,0,O},{0,0,0,1,RADICAL}}, MoleculeType.ESTER));
+                new byte[][] {{RADICAL},{2,O},{1,0,O},{0,0,1,RADICAL}}, MoleculeType.ESTER));
         moleculeSet.add(new AtomicStructureTemplate<>(
                 new byte[][] {{RADICAL},{1,O},{0,1,C},{0,0,2,O},{0,0,1,0,O},{0,0,0,0,1,RADICAL}}, MoleculeType.CARBONATE));
         moleculeSet.add(new AtomicStructureTemplate<>(
