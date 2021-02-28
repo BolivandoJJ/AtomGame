@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.atomgame.atom.Atom;
+import com.example.atomgame.atom.C;
 import com.example.atomgame.atom.H;
+import com.example.atomgame.atomicstructure.AtomicStructure;
 import com.example.atomgame.atomicstructure.Molecule;
 import com.example.atomgame.atomicstructure.FunctionalGroup;
 import com.example.atomgame.atomicstructure.type.MoleculeType;
@@ -78,6 +80,67 @@ public class AtomicStructureFactory {
             matrix[skeleton.size() - 1][0] = connection.getType();
         }
         return matrix;
+    }
+
+    private byte[][] createComparsionMatrix(@NonNull byte[][] skeletonMatrix) {
+        byte[][] radicalMatrix = new byte[skeletonMatrix.length][];
+        for (byte i = 0; i < skeletonMatrix.length; i++) {
+            radicalMatrix[i] = new byte[i + 1];
+        }
+        byte matrixSize;
+        byte matrixIndex = 0;
+        try {
+            if (skeletonMatrix[0][0] == AtomicStructureTemplate.C) {
+                radicalMatrix[matrixIndex][matrixIndex] = AtomicStructureTemplate.RADICAL;
+            } else {
+                radicalMatrix[matrixIndex][matrixIndex] = skeletonMatrix[0][0];
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Skeleton matrix is empty", e);
+        }
+        for (byte i = 1; i < skeletonMatrix.length; i++) {
+            if (skeletonMatrix[i][i] == AtomicStructureTemplate.C) {
+                if ((radicalMatrix[matrixIndex][matrixIndex] != AtomicStructureTemplate.RADICAL) || (skeletonMatrix[i][i-1] > 1)) {
+                    matrixIndex++;
+                    radicalMatrix[matrixIndex][matrixIndex] = AtomicStructureTemplate.RADICAL;
+                    for (byte n = 1; n <= matrixIndex; n++) {
+                        radicalMatrix[matrixIndex][matrixIndex - n] = skeletonMatrix[i][i-n];
+                    }
+                }
+            } else {
+                matrixIndex++;
+                radicalMatrix[matrixIndex][matrixIndex] = skeletonMatrix[i][i];
+                for (byte n = 1; n <= matrixIndex; n++) {
+                    radicalMatrix[matrixIndex][matrixIndex - n] = skeletonMatrix[i][i-n];
+                }
+            }
+        }
+        matrixSize = (byte) (matrixIndex + 1);
+        radicalMatrix = Arrays.copyOf(radicalMatrix, matrixSize);
+        if (skeletonIsCycled) {
+            boolean matrixContainsRadical = false;
+            // checking matrix contains radicals
+            for (byte i = 0; i < matrixSize; i++) {
+                if (radicalMatrix[i][i] == AtomicStructureTemplate.RADICAL) {
+                    matrixContainsRadical = true;
+                    break;
+                }
+            }
+            if (matrixContainsRadical) {
+                byte[][] tmpMatrix = Arrays.copyOf(radicalMatrix, radicalMatrix.length);
+                while (tmpMatrix[0][0] != AtomicStructureTemplate.RADICAL) {
+                    for (byte i = 1; i < matrixSize; i++) {
+                        tmpMatrix[matrixSize - 1][i - 1] = radicalMatrix[i][0];
+                        for (byte j = i; j < matrixSize; j++) {
+                            tmpMatrix[j - 1][i - 1] = radicalMatrix[j][i];
+                        }
+                    }
+                }
+                tmpMatrix[matrixSize][matrixSize] = radicalMatrix[0][0];
+                radicalMatrix = tmpMatrix;
+            }
+        }
+        return radicalMatrix;
     }
 
     // TODO: change logic
