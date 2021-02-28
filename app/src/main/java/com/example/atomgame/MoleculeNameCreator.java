@@ -57,7 +57,7 @@ public class MoleculeNameCreator {
                 }
                 Byte increment = cyclicMoleculeRootIncrementationValues.get(type);
                 if (increment != null) {
-                    radicalLength = (byte) (getSumOfRadicalLengths(moleculeFormula) + increment);
+                    radicalLength += increment;
                 } else {
                     throw new NullPointerException("cyclicMoleculeRootIncrementationValues was incorrect initialized and has no contains required element.");
                 }
