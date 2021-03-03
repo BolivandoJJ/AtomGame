@@ -1,5 +1,7 @@
 package com.example.atomgame.atom;
 
+import androidx.annotation.NonNull;
+
 import com.example.atomgame.Connection;
 import com.example.atomgame.Placeable;
 
@@ -36,6 +38,31 @@ public abstract class Atom implements Placeable {
 
     public boolean containsConnection(Connection connection) {
         return connections.contains(connection);
+    }
+
+    public boolean connectedWith(@NonNull Atom connectedAtom) {
+        if (connectedAtom == this) {
+            return false;
+        }
+        for (Connection connection : connections) {
+            for (Atom atom : connection.getConnectedAtoms()) {
+                if (atom == connectedAtom) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean connectedWith(byte atomicNumber) {
+        for (Connection connection : connections) {
+            for (Atom atom : connection.getConnectedAtoms()) {
+                if ((atom != this) && (atom.getAtomicNumber() == atomicNumber)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public boolean addConnection(Connection connection) {
