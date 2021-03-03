@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.example.atomgame.Connection;
 import com.example.atomgame.Placeable;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -63,6 +64,15 @@ public abstract class Atom implements Placeable {
             }
         }
         return false;
+    }
+
+    public HashSet<Atom> getConnectedAtoms() {
+        HashSet<Atom> connectedAtoms = new HashSet<>();
+        for (Connection connection : connections) {
+            Collections.addAll(connectedAtoms, connection.getConnectedAtoms());
+        }
+        connectedAtoms.remove(this);
+        return connectedAtoms;
     }
 
     public boolean addConnection(Connection connection) {
