@@ -29,6 +29,8 @@ public class MoleculeNameCreator {
     private static HashMap<MoleculeType, Byte> cyclicMoleculeRootIncrementationValues;
     private static HashMap<MoleculeType, String> simpleMoleculeNames;
 
+    private static HashMap<FunctionalGroupType, String> functionalGroupNames;
+
     // TODO: initialize collections
     public static void initResources(@NonNull Resources resources) {
         if (!classInitialized) {
@@ -183,5 +185,9 @@ public class MoleculeNameCreator {
         } else {
             throw new NullPointerException("cyclicMoleculeRules was incorrect initialized and has no contains required element");
         }
+    }
+
+    public static String getFunctionalGroupName(@NonNull FunctionalGroupType type) {
+        return functionalGroupNames.get(type);
     }
 }
